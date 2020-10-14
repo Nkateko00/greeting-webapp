@@ -1,0 +1,54 @@
+<div class="greetings">
+    <h1>Greetings App</h1>
+</div>
+
+<div class="error">
+        {{messages.error}}
+</div>
+
+
+<form action="/greetings" method="POST">
+
+    <div class="">
+        <input type="text" name="userName"  id="inputElement" class="textArea" placeholder="enter your name here"
+            value={{greetings.userName}}>
+    </div>
+
+    <hr>
+
+    <div class="radioContainer">
+
+
+        <label><input type="radio" name="radio" value="French"> French</label>
+        <label> <input type="radio" name="radio" value="Xitsonga"> Xitsonga</label>
+        <label><input type="radio" name="radio" value="English"> English</label>
+
+
+    </div>
+
+    <button class="button-primary" type="submit" name="greetButton">Greet Me</button>
+
+
+    <button class="button-primary" type="submit" name="resetButton"><a href="/reset">Refresh</a></button>
+
+    <div class="greeting">
+
+        <h1>{{greetUser}}</h1>
+        <h1>{{greetCount}}</h1>
+    </div>
+
+    <table>
+        <tr>
+            <td>
+                <a href="/greeted">Greeted Names</a>
+            </td>
+        </tr>
+
+    </table>
+
+</form>
+
+{{!-- <script src="factory/greet.js"></script>
+<script src="greet.js"></script> --}}
+
+</html>
