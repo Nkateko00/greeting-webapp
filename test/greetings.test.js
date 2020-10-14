@@ -13,66 +13,49 @@ let Greeting = require('../greetings')
     var greetings = Greeting(pool);
 
 
-    describe('The addNames function', function () {
+    describe('The addNames function',async function () {
 
         beforeEach(async function () {
             await pool.query(`delete from greetings`);
         });
 
-        it("should add any name when greeted onto the database",function(){
+        it("should add any name when greeted onto the database",async function(){
 
-            var name = "Teko";
+            var name = 'Teko';
 
-            await greetings.countPerson(name)
-            const appUsers = await greetings.getAllUsers()
-            assert.deepEqual([{ name: "Teko" }], appUsers)
+            await greetings.addNames(name)
+            
+            assert.deepEqual([{ name:'Teko'}], await greetings.getAllUsers())
 
         });
          
-        it("should add more than one name on the database",function(){
+        it("should add more than one name on the database",async function(){
+            
             var name1 = "Teko";
             var name2 = "Khanyisile";
             var name3 = "Sizwe";
-            await greetings.countPerson(name1)
-            await greetings.countPerson(name2)
-            await greetings.countPerson(name3)
 
-            const appUsers = await greetings.getAllUsers()
-            assert.deepEqual([{name1 : "Teko"}], [{name2 : "Khanyisile"}] ,[{name3 : "Sizwe"}],appUsers);
-        })
-        it('should pass the db test', async function () {
-
-            // the Factory Function is called CategoryService
-            let categoryService = CategoryService(pool);
-            await categoryService.add({
-                description: "Diary"
-            });
-
-            let categories = await categoryService.all();
-            assert.equal(1, categories.length);
-
+            await greetings.addNames(name1)
+            await greetings.addNames(name2)
+            await greetings.addNames(name3)
+        
+            assert.deepEqual([{name : "Khanyisile"}],[{name : "Khanyisile"}] ,[{name : "Sizwe"}],await greetings.getAllUsers());
         });
+        // it("should be able to add on the counter when someone is greeted",async function(){
 
+        //     var name1 = "Kagiso";
+        //     var name2 = "Nkateko";
+        //     var name3 = "Siphiwe";
+        //     var name4 = "Godly";
+        //     var name5 = "Travis";
 
-        const assert = require('assert');
-        const CategoryService = require('../services/category-service');
-        const pg = require("pg");
-        const Pool = pg.Pool;
+        //     await greetings.greetCount(4);
 
-        // we are using a special test database for the tests
-        const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/my_products_test';
+        //     assert.deepEqual()
 
-        const pool = new Pool({
-            connectionString
-        });
-
-        describe('The addNames function', function () {
-
-            beforeEach(async function () {
-                await pool.query(`delete from greetings`);
-            });
-
-            after(function () {
-                pool.end();
-            })
+        // });
+        
+                after(function () {
+                    pool.end();
+                })
         });
