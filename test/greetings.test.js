@@ -54,56 +54,6 @@ let Greeting = require('../greetings')
         });
 
 
-
-
-      
-        //         it("should be able to find counter for times a person was greeted ", async function () {
-
-        //             var name = "Kagiso"
-
-
-        //             await greetings.verifyName(name)
-
-        //             await greetings.verifyName(name)
-
-        //             assert.deepEqual(2, await greetings.perPerson(name));
-        //         });
-
-        //         it("should be able to get counter for all greeted users", async function () {
-
-        //             const name2 = "sphiwe";
-        //             const name3 = "teko";
-        //             const name4 = "charl";
-        //             const name5 = "Mecayle";
-
-        //             await greetings.verifyName(name5)
-        //             await greetings.verifyName(name2)
-        //             await greetings.verifyName(name3)
-        //             await greetings.verifyName(name4)
-
-        //             const allUsers = await greetings.allUsers()
-
-        //             assert.deepEqual(4, await greetings.greetCount());
-        //         });
-
-        //         it("should be able to reset the dataBase", async function () {
-
-        //             await greetings.verifyName('siya')
-        //             await greetings.verifyName('Ayanda')
-
-        //             const allUsers = await greetings.allUsers()
-
-        //             assert.deepEqual([], await greetings.reset());
-        //         });
-
-        //         after(function () {
-        //             pool.end();
-        //         })
-        //     });
-        // })
-
-
-
         const assert = require('assert');
         const CategoryService = require('../services/category-service');
         const pg = require("pg");
