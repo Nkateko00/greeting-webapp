@@ -94,6 +94,7 @@ app.post('/greetings', async function (req, res) {
         greetCount: greetingCounter
 
     });
+    
 
 });
 

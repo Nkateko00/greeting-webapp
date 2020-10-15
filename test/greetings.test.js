@@ -21,11 +21,11 @@ let Greeting = require('../greetings')
 
         it("should add any name when greeted onto the database",async function(){
 
-            var name = 'Teko';
+            var name = "Teko";
 
             await greetings.addNames(name)
             
-            assert.deepEqual([{ name:'Teko'}], await greetings.getAllUsers())
+            assert.deepEqual([{ name:"Teko"}], await greetings.getAllUsers())
 
         });
          
@@ -41,21 +41,31 @@ let Greeting = require('../greetings')
         
             assert.deepEqual([{name : "Khanyisile"}],[{name : "Khanyisile"}] ,[{name : "Sizwe"}],await greetings.getAllUsers());
         });
-        // it("should be able to add on the counter when someone is greeted",async function(){
+         it("should be able to add on the counter when someone is greeted",async function(){
 
-        //     var name1 = "Kagiso";
-        //     var name2 = "Nkateko";
-        //     var name3 = "Siphiwe";
-        //     var name4 = "Godly";
-        //     var name5 = "Travis";
+            var name1 = "Kagiso";
+            var name2 = "Nkateko";
+            var name3 = "Siphiwe";
+            var name4 = "Godly";
+            var name5 = "Travis";
 
-        //     await greetings.greetCount(4);
+      
 
-        //     assert.deepEqual()
 
-        // });
+            await greetings.addNames(name1);
+            await greetings.addNames(name2);
+            await greetings.addNames(name3);
+            await greetings.addNames(name4);
+            await greetings.addNames(name5);
+
+
+            await greetings.getAllUsers()
+
+            assert.deepEqual(5, await greetings.greetCount());
+        
         
                 after(function () {
                     pool.end();
-                })
+                });
+            });
         });
