@@ -1,7 +1,7 @@
 language: node_js
 
 env:
-  - DATABASE_URL=postgresql://postgresql@localhost:5432/greetings
+  - DATABASE_URL=postgresql://postgres@localhost:5432/greetings
 
 node_js:  
   - "12.18.3"
@@ -12,3 +12,6 @@ before_script:
 
 services:
   - postgresql
+
+
+  
