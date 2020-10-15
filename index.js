@@ -84,8 +84,9 @@ app.post('/greetings', async function (req, res) {
     else if (name === '') {
         req.flash('error', 'Please enter a name')
     }
-    await greetings.addNames(name)
-    if (name !== '' && language !== "") {
+    await greetings.addNames(name);
+   
+       if(name !=='' && language !==""){
         var greetUsers = await greetings.greetUser(name, language)
         var greetingCounter = await greetings.greetCount();
     }
