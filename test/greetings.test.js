@@ -63,7 +63,16 @@ let Greeting = require('../greetings')
 
             assert.deepEqual(5, await greetings.greetCount());
         
-        
+            it("should be able to reset the dataBase", async function () {
+
+                await greetings.countPerson('Siliziwe')
+                await greetings.countPerson('Faye')
+    
+                const allUsers = await greetings.allUsers()
+    
+                assert.deepEqual([], await greetings.reset());
+            });
+    
                 after(function () {
                     pool.end();
                 });

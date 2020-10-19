@@ -1,13 +1,19 @@
 module.exports = function (pool) {
 
-    async function addNames(name) {
+async function addNames(name) {
+   
         var specialCase = /[^A-Za-z]/g;
         var noNumber = name.replace(specialCase, "")
         var nameReceieved = noNumber.charAt(0).toUpperCase() + noNumber.slice(1).toLowerCase();
+       
+        const verify = await pool.query(`select id from greetings where name = $1`, [nameReceieved])
+            if (verify.rowCount === 0) {
+                await pool.query(`insert into greetings (name,counter) values ($1, 0)`, [nameReceieved]);
+            }
+            await pool.query(`update greetings set counter = counter+1 where name = $1`, [nameReceieved])
+        
 
-        await pool.query(`update greetings set counter = counter+1 where name =$1`, [name])
     }
-
 async function greetCount() {
     const counter = await pool.query(`select count(*) as counter from greetings`)
     return counter.rows[0].counter
@@ -30,10 +36,13 @@ async function reset() {
 }
 
 async function greetUser(name, language) {
-    if (!name || !language) {
-        return "";
-    }
+    var specialCase = /[^A-Za-z]/g;
+    var lettersOnly = name.replace(specialCase, "")
+    var fixedName = lettersOnly.charAt(0).toUpperCase() + lettersOnly.slice(1).toLowerCase()
+    if(fixedName !== ""){
+   
     switch (language) {
+        // case !name || !language :
         case "French":
             return "Bonjour  " + name;
         case "Xitsonga":
@@ -42,6 +51,7 @@ async function greetUser(name, language) {
             return "Hello " + name;
         default:
             return "";
+    }
     }
 }
 return {
@@ -53,5 +63,7 @@ return {
     greetUser
 
 }
+
+
 
 }
