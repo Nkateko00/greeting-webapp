@@ -30,9 +30,8 @@ async function getAllUsers() {
 }
 
 async function reset() {
-    await pool.query(`delete from greetings`)
-
-    //return users;
+    const users = await pool.query(`delete from greetings`)
+    return users.rows;
 }
 
 async function greetUser(name, language) {
@@ -67,3 +66,13 @@ return {
 
 
 }
+
+
+
+
+
+
+
+
+
+

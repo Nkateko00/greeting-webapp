@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const flash = require('express-flash')
 const session = require('express-session');
 const Greeting = require("./greetings");
-const routes = require('./route');
+var routes = require('./route');
 
 const handlebarSetup = exphbs({
     defaultLayout: 'main'

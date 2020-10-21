@@ -1,6 +1,6 @@
 module.exports = function greetingsRoutes(greetings) {
     async function home(req, res, next) {
-        //remder the home page
+        //render the home page
         try {
             res.render('home');
         } catch (err) {

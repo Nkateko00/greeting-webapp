@@ -50,8 +50,6 @@ let Greeting = require('../greetings')
             var name5 = "Travis";
 
       
-
-
             await greetings.addNames(name1);
             await greetings.addNames(name2);
             await greetings.addNames(name3);
@@ -62,19 +60,19 @@ let Greeting = require('../greetings')
             await greetings.getAllUsers()
 
             assert.deepEqual(5, await greetings.greetCount());
-        
+        });
             it("should be able to reset the dataBase", async function () {
 
-                await greetings.countPerson('Siliziwe')
-                await greetings.countPerson('Faye')
+                await greetings.addNames('Siliziwe')
+                await greetings.addNames('Faye')
     
-                const allUsers = await greetings.allUsers()
+                const theUsers = await greetings.getAllUsers()
     
                 assert.deepEqual([], await greetings.reset());
             });
-    
+            
                 after(function () {
                     pool.end();
                 });
             });
-        });
+        
