@@ -1,22 +1,20 @@
 <div class="Greeted">
 
-  <h1>Greeted Names </h1>
-</div>
+    <h1>Greeted Names </h1>
+  </div>
 
-<div class="">
-  <h2> Names : </h2>
+  <div class="">
+    <h2> Names : </h2>
 
-  {{!-- <hr> --}}
-  {{#each name}}
-  <ulclass="header">
+    {{!-- <hr> --}}
+    <class="header">
 
-    <a href="/counter/{{this.name}}">
-      <li> {{this.name}}</li>
-    </a>
+      {{#each name}}
+      <a href="/counter/{{this.name}}">
+        <p> {{this.name}}</p>
+      </a>
+      {{/each}}
 
-    </ul>
-    {{/each}}
-
-</div>
+  </div>
   <hr>
-   <a href="/"><button>Back</button></a>
+  <a href="/"><button>Back</button></a>

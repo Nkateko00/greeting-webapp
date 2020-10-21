@@ -1,71 +1,80 @@
 module.exports = function greetingsRoutes(greetings) {
+
+    //render the home page
     async function home(req, res, next) {
-        //render the home page
         try {
-            res.render('home');
+            var count = await greetings.greetCount();
+            res.render('home', {
+                counter: count
+            });
+
         } catch (err) {
             next(err)
         }
     }
+    //get all names of greeted users
     async function greetingNames(req, res, next) {
-        //get all names of greeted users
-        const name = req.body.textItem;
-        const language = req.body.selector;
-        const greetedUsers = greetings.greetUser(name, language);
-        
+        var name = req.body.userName;
+        var language = req.body.radio;
+        var count = await greetings.greetCount();
         try {
+
             if (name === '' && language === undefined) {
                 req.flash('error', 'Please enter your name and select a langauge');
+
             }
             else if (language === undefined) {
                 req.flash('error', 'Please select a language');
             }
             else if (name === '') {
-                req.flash('error', 'Please enter a name');  
-            }else {
-                await greetings.addToDatabase(name);
-                var count = await greetings.getGreetCounter(name);
+                req.flash('error', 'Please enter a name');
+            } else {
+                await greetings.addNames(name);
+                var count = await greetings.greetCount();
+                var greetedUsers = await greetings.greetUser(name, language);
             }
             res.render('home', {
-                txtBox: await greetedUsers,
-                counter: count
+                greetUser: greetedUsers,
+                greetCount: count
             });
         } catch (err) {
             next(err);
         }
     }
-    async function greeted(req, res, next) {
+    //counts each name & gets the count
+    async function countAll(req, res) {
         var name = req.params.name;
-        //greeted route
+        var numberOfTimes = await greetings.countPerson(name)
+        //return the object key in this case
+        for (const key in numberOfTimes) {
+            var element = numberOfTimes[key];
+        }
+        res.render('counter', {
+            name: name,
+            counter: element
+        });
 
+    }
+
+
+    //greeted route
+    async function greetedNames(req, res, next) {
+        var name = req.params.name;
         try {
             const names = await greetings.getAllUsers(name)
-            res.render('greeted', {
-                name: names
-            });
+            res.render('greeted', 
+                { name: names });
+            
 
         } catch (err) {
             next(err)
         }
     }
-    async function countAll(req, res, next) {
-        var name = req.params.name;
-        //counts each name & gets the count
-        try {
-            var count = await greetings.countPerson(name)
-            res.render('counter', {
-                name: name,
-                counter: count
-            })
-        } catch (err) {
-            next(err)
-        }
-    }
 
+    //reset function
     async function reset(req, res, next) {
-        //reset function
+        var reset = await greetings.reset()
         try {
-            var reset = await greetings.reset()
             res.render('home')
         } catch (err) {
             next(err)
@@ -78,6 +87,7 @@ module.exports = function greetingsRoutes(greetings) {
         home,
         greetingNames,
         countAll,
-        greeted
+        greetedNames
     }
 }
+

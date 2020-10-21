@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 const flash = require('express-flash')
 const session = require('express-session');
 const Greeting = require("./greetings");
-var routes = require('./route');
+var Routes = require('./route');
+
+
 
 const handlebarSetup = exphbs({
     defaultLayout: 'main'
@@ -27,6 +29,9 @@ app.use(session({
 }));
 app.use(flash());
 
+const greetings = Greeting(pool);
+const routes = Routes(greetings);
+
 
 app.engine('handlebars', handlebarSetup);
 app.set('view engine', 'handlebars');
@@ -44,7 +49,7 @@ app.get('/', routes.home);
 
 app.post('/greetings', routes.greetingNames);
 
-app.get('/greeted', routes.greeted);
+app.get('/greeted', routes.greetedNames);
 
 app.get('/counter/:user', routes.countAll);
 
