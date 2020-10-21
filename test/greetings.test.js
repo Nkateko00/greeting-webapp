@@ -70,7 +70,7 @@ let Greeting = require('../greetings')
     
                 assert.deepEqual([], await greetings.reset());
             });
-            it('counter should remain constant if name is addes twice a', async function(){
+            it('counter should remain constant if name is added twice a', async function(){
             
               await greetings.addNames('Faye', 'English');
               await greetings.addNames('Faye', 'French');
