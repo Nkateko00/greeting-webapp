@@ -28,6 +28,8 @@ module.exports = function (pool) {
             var nameReceieved = noNumber.charAt(0).toUpperCase() + noNumber.slice(1).toLowerCase();
 
             const verify = await pool.query(`select id from greetings where name = $1`, [nameReceieved])
+
+            //counter should not increment where the name is not added 
             if (verify.rowCount === 0) {
                 await pool.query(`insert into greetings (name,counter) values ($1, 0)`, [nameReceieved]);
             }
@@ -41,7 +43,7 @@ module.exports = function (pool) {
     }
 
     async function countPerson(name) {
-        const person = await pool.query(`select counter from greetings where name = $1`, [name])
+        var person = await pool.query(`select counter from greetings where name = $1`, [name])
         return person.rows[0];
     }
 

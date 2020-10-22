@@ -51,7 +51,8 @@ app.post('/greetings', routes.greetingNames);
 
 app.get('/greeted', routes.greetedNames);
 
-app.get('/counter/:user', routes.countAll);
+app.get('/counter/:userName',routes.countAll);
+//from handlebars
 
 app.get('/reset', routes.reset);
 

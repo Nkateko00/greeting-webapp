@@ -43,8 +43,10 @@ module.exports = function greetingsRoutes(greetings) {
     }
     //counts each name & gets the count
     async function countAll(req, res) {
-        var name = req.params.name;
+        var name = req.params.userName;
+        console.log(name);
         var numberOfTimes = await greetings.countPerson(name)
+        console.log(numberOfTimes);
         //return the object key in this case
         for (const key in numberOfTimes) {
             var element = numberOfTimes[key];
