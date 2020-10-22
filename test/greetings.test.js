@@ -9,7 +9,6 @@ let Greeting = require('../greetings')
         connectionString
     });
 
-
     var greetings = Greeting(pool);
 
 
@@ -70,7 +69,7 @@ let Greeting = require('../greetings')
     
                 assert.deepEqual([], await greetings.reset());
             });
-            it('counter should remain constant if name is added twice a', async function(){
+            it('counter should remain constant if name is added twice ', async function(){
             
               await greetings.addNames('Faye', 'English');
               await greetings.addNames('Faye', 'French');
