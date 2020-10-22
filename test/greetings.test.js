@@ -77,8 +77,19 @@ let Greeting = require('../greetings')
               await assert.equal(await greetings.greetCount(), 1);
             })
             
+            it('should give a count of two if two identical names are added',async function(){
+
+                var name = "Teko";
+                await greetings.addNames(name);
+                await greetings.addNames(name);
+
+                assert.equal(await greetings.countPerson(name),await greetings.greetCount(3));
+             
+                
+            })
+
                 after(function () {
                     pool.end();
                 });
+
             });
-        
