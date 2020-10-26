@@ -38,7 +38,8 @@ let Greeting = require('../greetings')
             await greetings.addNames(name2)
             await greetings.addNames(name3)
         
-            assert.deepEqual([{name : "Khanyisile"}],[{name : "Khanyisile"}] ,[{name : "Sizwe"}],await greetings.getAllUsers());
+            assert.deepEqual([{name : "Khanyisile"}],[{name : "Khanyisile"}] ,
+            [{name : "Sizwe"}],await greetings.getAllUsers());
         });
          it("should be able to add on the counter when someone is greeted",async function(){
 
@@ -78,12 +79,12 @@ let Greeting = require('../greetings')
             })
             
             it('should give a count of two if two identical names are added',async function(){
-
-                var name = "Teko";
+                var name = "Thiago"
                 await greetings.addNames(name);
                 await greetings.addNames(name);
-
-                assert.equal(await greetings.countPerson(name),await greetings.greetCount(3));
+    
+                assert.deepEqual(await greetings.countPerson(name),{counter : 2});
+            });
              
                 
             })
@@ -92,4 +93,4 @@ let Greeting = require('../greetings')
                     pool.end();
                 });
 
-            });
+    
